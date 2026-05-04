@@ -44,28 +44,28 @@ class _ExamSessionViewState extends ConsumerState<ExamSessionView> {
     // (safe to call inherited widgets here). Store the resumable session id
     // for use later so we avoid calling ModalRoute.of(context) from async
     // callbacks where the element may be deactivated.
-    final _routeArgs = ModalRoute.of(context)?.settings.arguments;
-    _resumableSessionId = _routeArgs is String && _routeArgs.trim().isNotEmpty
-        ? _routeArgs.trim()
+    final routeArgs = ModalRoute.of(context)?.settings.arguments;
+    _resumableSessionId = routeArgs is String && routeArgs.trim().isNotEmpty
+        ? routeArgs.trim()
         : null;
 
     // Read provider state synchronously while the element tree is stable
     // so we don't call `ref.read` from inside a callback that might run
     // after the widget is unmounted.
-    final _initialController = ref.read(examSessionControllerProvider.notifier);
-    final _initialDashboardState = ref.read(studentDashboardControllerProvider);
-    final _initialHasActiveCoaching =
-        _initialDashboardState.coachingFormData?.assignment.activeCoachingId !=
+    final initialController = ref.read(examSessionControllerProvider.notifier);
+    final initialDashboardState = ref.read(studentDashboardControllerProvider);
+    final initialHasActiveCoaching =
+        initialDashboardState.coachingFormData?.assignment.activeCoachingId !=
             null ||
-        _initialDashboardState.profile?['coachingId'] != null;
-    final _initialSourceType = _initialHasActiveCoaching ? 'coaching' : null;
+        initialDashboardState.profile?['coachingId'] != null;
+    final initialSourceType = initialHasActiveCoaching ? 'coaching' : null;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (_resumableSessionId != null) {
-        _initialController.loadSession(_resumableSessionId!);
+        initialController.loadSession(_resumableSessionId!);
       } else {
-        _initialController.startSession(sourceType: _initialSourceType);
+        initialController.startSession(sourceType: initialSourceType);
       }
     });
 
