@@ -180,7 +180,7 @@ Frontend base URL:
 
 ### Backend
 
-1. cd lib/website_version/server
+1. cd lib/server
 2. copy .env.example to .env and configure values
 3. npm install
 4. npm run seed
@@ -199,9 +199,12 @@ Android emulator example:
 
 After npm run seed:
 
-- Platform admin: platform_admin@ieltstar.com / Admin@12345
-- Student: student1@demo.com / Student@123
-- Coaching admin: coach1@demo.com / Coach@123
+- Platform admin: admin@g.com / Admin@12345 *(from .env PLATFORM_ADMIN_SEED_EMAIL/PASSWORD)*
+- Teacher: teacher1@demo.com / Teacher@123
+- Student: student1@demo.com / Student@123 *(Aisha Khan - 100 mock credits)*
+- Coaching admin: coach1@demo.com / Coach@123 *(Bright IELTS Academy)*
+
+For detailed demo flows and troubleshooting, see **[DEMO_SETUP.md](./DEMO_SETUP.md)**
 
 ## 11) Testing
 
