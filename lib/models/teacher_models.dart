@@ -403,17 +403,22 @@ class TeacherReviewSubmitResult {
     required this.request,
     required this.rewardCreditsAdded,
     required this.raw,
+    this.updatedSession,
   });
 
   final EvaluationRequestModel request;
   final double rewardCreditsAdded;
   final Map<String, dynamic> raw;
+  final Map<String, dynamic>? updatedSession;
 
   factory TeacherReviewSubmitResult.fromJson(Map<String, dynamic> json) {
     return TeacherReviewSubmitResult(
       request: EvaluationRequestModel.fromJson(_toMap(json['request'])),
       rewardCreditsAdded: _toNullableDouble(json['rewardCreditsAdded']),
       raw: json,
+      updatedSession: json['updatedSession'] is Map<String, dynamic>
+          ? (json['updatedSession'] as Map<String, dynamic>)
+          : null,
     );
   }
 }
